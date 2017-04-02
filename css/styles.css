@@ -5,6 +5,7 @@
 
 body {
   background-color:#99CCFF;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
 
 @-webkit-keyframes zoom {
@@ -39,7 +40,7 @@ body {
   color:white;
   width:80%;
   height:80px;
-  font-size:94px;
+  font-size:84px;
   margin-top:2%;
 }
 
@@ -120,6 +121,26 @@ body {
   visibility:visible;
 }
 
+.pictures .mouseOverText {
+  text-align: center;
+  text-shadow: -1px 0 #939393, 0 1px #939393, 1px 0 #939393, 0 -1px #939393;
+  position:relative;
+  color:#FFF;
+  height:150px;;
+  opacity: 0.9;
+  width:150px;
+  background-color:transparent;
+  bottom:151px;
+  border:none;
+  font-size:30px;
+  left:0px;
+  visibility:hidden;
+}
+
+.pictures:hover .mouseOverText {
+  visibility:visible;
+}
+
 .picture{
   height:150px;
 }
@@ -129,8 +150,10 @@ body {
   margin:1px;
   height:50px;
   width:150px;
+  bottom:152px;
   overflow-y: auto;
   overflow-x: hidden;
+  position:relative;
 }
 
 .saveBtn{

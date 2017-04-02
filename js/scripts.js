@@ -154,6 +154,8 @@ function showList(){
   for (var i=0; i < myListPhotoUrl.length; i++){
     var child = document.createElement("a");
     var altText = document.createElement("p");
+    var imgText = document.createElement("button");
+
     child.className += "pictures";
     child.innerHTML = '<img class="picture" alt="'+ myListPhotoTitle[i] + '"src="' + myListPhotoUrl[i] + '"/>';
     child.addEventListener( "click", function(){
@@ -163,6 +165,13 @@ function showList(){
     altText.className = "altText";
     altText.innerHTML = myListPhotoTitle[i];
 
+    imgText.className += "mouseOverText";
+    imgText.innerHTML = "Preview";
+    imgText.addEventListener( "click", function(){
+        previewPicture(this.previousSibling.src);
+    });
+
+    child.appendChild(imgText);
     child.appendChild(altText);
     document.getElementById("resultBox").appendChild(child);
   }
