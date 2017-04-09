@@ -49,6 +49,36 @@ function searchPictures() {
   }
 }
 
+//Builds users personal photo-list from global variables.
+function showList(){
+  removeChildren("resultBox");
+
+  for (var i=0; i < myListPhotoUrl.length; i++){
+    var child = document.createElement("a");
+    var altText = document.createElement("p");
+    var imgText = document.createElement("button");
+
+    child.className += "pictures";
+    child.innerHTML = '<img class="picture" alt="'+ myListPhotoTitle[i] + '"src="' + myListPhotoUrl[i] + '"/>';
+    child.addEventListener( "click", function(){
+        previewPicture(this.firstChild.src);
+    });
+
+    altText.className = "altText";
+    altText.innerHTML = myListPhotoTitle[i];
+
+    imgText.className += "mouseOverText";
+    imgText.innerHTML = "Preview";
+    imgText.addEventListener( "click", function(){
+        previewPicture(this.previousSibling.src);
+    });
+
+    child.appendChild(imgText);
+    child.appendChild(altText);
+    document.getElementById("resultBox").appendChild(child);
+  }
+}
+
 //Adds photos from Flickr to child elements of div "resultBox".
 function callback(data) {
   if(data){
@@ -65,51 +95,59 @@ function callback(data) {
 
    //For each photo, build and place info for HTML elements.
    for (var i=0; i < rsp.photos.photo.length; i++) {
-
-      var child = document.createElement("div");
-      var picBox = document.createElement("div");
-      var img = document.createElement("img");
-      var imgText = document.createElement("button");
-      var favBtn = document.createElement("button");
-
-      photo = rsp.photos.photo[i];
-      t_url = photoUrlBuilder(photo.farm, photo.server, photo.id, photo.secret);
-
-      child.className += "pictures";
-      picBox.className += "pictureBox";
-
-      img.className += "picture";
-      img.setAttribute("alt", photo.title);
-      img.setAttribute("src", t_url);
-      img.addEventListener( "click", function(){
-          previewPicture(this.src);
-      });
-
-      imgText.className += "mouseOverText";
-      imgText.innerHTML = "Preview";
-      imgText.addEventListener( "click", function(){
-          previewPicture(this.previousSibling.src);
-      });
-
-      favBtn.className = 'saveBtn';
-      favBtn.innerHTML = 'Save picture';
-      favBtn.addEventListener( 'click', function(){
-          addPictureToList(this.previousSibling.firstChild.alt, this.previousSibling.firstChild.src);
-          this.style.backgroundColor = "#8ECC8E";
-          this.innerHTML = "Saved!"
-          this.disabled = true;
-      });
-
-      picBox.appendChild(img);
-      picBox.appendChild(imgText);
-      child.appendChild(picBox);
-      child.appendChild(favBtn);
-      resultBox.appendChild(child);
+      photoBuilder(rsp.photos.photo[i]);
    }
  }
  else{
-   console.log("No data was recived from request.");
+   console.log("Passed parameter is empty.");
  }
+}
+
+//Creates photo boxes
+function photoBuilder(photo){
+  if(photo){
+    var child = document.createElement("div");
+    var picBox = document.createElement("div");
+    var img = document.createElement("img");
+    var imgText = document.createElement("button");
+    var favBtn = document.createElement("button");
+
+    t_url = photoUrlBuilder(photo.farm, photo.server, photo.id, photo.secret);
+
+    child.className += "pictures";
+    picBox.className += "pictureBox";
+
+    img.className += "picture";
+    img.setAttribute("alt", photo.title);
+    img.setAttribute("src", t_url);
+    img.addEventListener( "click", function(){
+        previewPicture(this.src);
+    });
+
+    imgText.className += "mouseOverText";
+    imgText.innerHTML = "Preview";
+    imgText.addEventListener( "click", function(){
+        previewPicture(this.previousSibling.src);
+    });
+
+    favBtn.className = 'saveBtn';
+    favBtn.innerHTML = 'Save picture';
+    favBtn.addEventListener( 'click', function(){
+        addPictureToList(this.previousSibling.firstChild.alt, this.previousSibling.firstChild.src);
+        this.style.backgroundColor = "#8ECC8E";
+        this.innerHTML = "Saved!"
+        this.disabled = true;
+    });
+
+    picBox.appendChild(img);
+    picBox.appendChild(imgText);
+    child.appendChild(picBox);
+    child.appendChild(favBtn);
+    resultBox.appendChild(child);
+  }
+  else{
+    console.log("Passed parameter is empty.");
+  }
 }
 
 //Creates photo urls based on callback from FlickrAPI.
@@ -119,7 +157,7 @@ function photoUrlBuilder(farm, server, id, secret){
     server + "/" + id + "_" + secret + "_" + "q.jpg";
   }
   else{
-    console.log("All variables was not passed.");
+    console.log("Passed parameter is empty.");
   }
 }
 
@@ -132,7 +170,7 @@ function removeChildren(id){
     }
   }
   else{
-    console.log("No child elements was passed for removal.");
+    console.log("Passed parameter is empty.");
   }
 }
 
@@ -165,7 +203,7 @@ function previewPicture(t_url){
     modalImg.src = t_url;
   }
   else {
-    console.log("No picture URL was passed.");
+    console.log("Passed parameter is empty.");
   }
 }
 
@@ -176,36 +214,6 @@ function addPictureToList(childTitle, childSrc){
     myListPhotoUrl.push(childSrc);
   }
   else{
-    console.log("No picture URL or info was passed.");
-  }
-}
-
-//Builds users personal photo-list from global variables.
-function showList(){
-  removeChildren("resultBox");
-
-  for (var i=0; i < myListPhotoUrl.length; i++){
-    var child = document.createElement("a");
-    var altText = document.createElement("p");
-    var imgText = document.createElement("button");
-
-    child.className += "pictures";
-    child.innerHTML = '<img class="picture" alt="'+ myListPhotoTitle[i] + '"src="' + myListPhotoUrl[i] + '"/>';
-    child.addEventListener( "click", function(){
-        previewPicture(this.firstChild.src);
-    });
-
-    altText.className = "altText";
-    altText.innerHTML = myListPhotoTitle[i];
-
-    imgText.className += "mouseOverText";
-    imgText.innerHTML = "Preview";
-    imgText.addEventListener( "click", function(){
-        previewPicture(this.previousSibling.src);
-    });
-
-    child.appendChild(imgText);
-    child.appendChild(altText);
-    document.getElementById("resultBox").appendChild(child);
+    console.log("Passed parameter is empty.");
   }
 }
