@@ -5,7 +5,7 @@ var myListPhotoUrl = [];
 // Request pictures from Flickr with users search value.
 function searchPictures() {
   var tag = document.getElementById('searchInput').value;
-
+  var searchBtn = document.getElementById("searchBtn");
   //If search value is not empty.
   if(tag){
     var response = "";
@@ -21,7 +21,7 @@ function searchPictures() {
     }
 
     removeChildren("resultBox");
-    document.getElementById("searchBtn").style.backgroundColor = "#7aa3cc";
+    searchBtn.style.backgroundColor = "#7aa3cc";
 
     //Builds URLs based on search value.
     for (var item in options) {
@@ -43,9 +43,8 @@ function searchPictures() {
     xhr.open('get', url, true);
     xhr.send();
   }
-
   else{
-    document.getElementById("searchBtn").style.backgroundColor = "#FF4C4C";
+    searchBtn.style.backgroundColor = "#FF4C4C";
   }
 }
 
@@ -57,6 +56,7 @@ function showList(){
     var child = document.createElement("a");
     var altText = document.createElement("p");
     var imgText = document.createElement("button");
+    var resultBox = document.getElementById("resultBox");
 
     child.className += "pictures";
     child.innerHTML = '<img class="picture" alt="'+ myListPhotoTitle[i] + '"src="' + myListPhotoUrl[i] + '"/>';
@@ -75,7 +75,7 @@ function showList(){
 
     child.appendChild(imgText);
     child.appendChild(altText);
-    document.getElementById("resultBox").appendChild(child);
+    resultBox.appendChild(child);
   }
 }
 
@@ -185,14 +185,14 @@ function previewPicture(t_url){
     removeChildren("myModal");
 
     child.innerHTML = '<img id="modalImg" src="' + t_url + '"/>';
-    document.getElementById('myModal').appendChild(child);
+    modal.appendChild(child);
 
     closeBtn.innerHTML = '<span class="close">&times;</span>';
     closeBtn.addEventListener( 'click', function(){
         document.getElementById("myModal").style.display = "none";
     });
 
-    document.getElementById('myModal').appendChild(closeBtn);
+    modal.appendChild(closeBtn);
 
     //Replaces targeted picture url from large square (150 x 150px)
     //to medium (800 on longest side).
