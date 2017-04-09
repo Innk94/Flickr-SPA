@@ -29,6 +29,9 @@ function searchPictures() {
         url += (first ? "?" : "&") + item + "=" + options[item];
         first = false;
       }
+      else {
+        console.log("Option have no item");
+      }
     }
 
     xhr.onreadystatechange = function() {
@@ -48,6 +51,7 @@ function searchPictures() {
 
 //Adds photos from Flickr to child elements of div "resultBox".
 function callback(data) {
+  if(data){
    var rsp = JSON.parse(data);
    var total = document.createElement("p");
    var resultBox = document.getElementById("resultBox");
@@ -103,18 +107,28 @@ function callback(data) {
       child.appendChild(favBtn);
       resultBox.appendChild(child);
    }
+ }
+ else{
+   console.log("No data was recived from request.");
+ }
 }
 
 //Removes child elements of div "resultBox".
 function removeChildren(id){
-  var childList = document.getElementById(id);
-  while (childList.firstChild) {
-      childList.removeChild(childList.firstChild);
+  if(id){
+    var childList = document.getElementById(id);
+    while (childList.firstChild) {
+        childList.removeChild(childList.firstChild);
+    }
+  }
+  else{
+    console.log("No child elements was passed for removal.");
   }
 }
 
 //Builds modal for preview of specific picture.
 function previewPicture(t_url){
+  if(t_url){
     var child = document.createElement("a");
     var closeBtn = document.createElement("span");
     var modal = document.getElementById('myModal')
@@ -139,12 +153,21 @@ function previewPicture(t_url){
     t_url = t_url.substr(0, count) + "c.jpg";
     modal.style.display = "block";
     modalImg.src = t_url;
+  }
+  else {
+    console.log("No picture URL was passed.");
+  }
 }
 
-//Adds single picture URL and Info to users personal photo-list.
+//Adds single picture URL and info to users personal photo-list.
 function addPictureToList(childTitle, childSrc){
-  myListPhotoTitle.push(childTitle);
-  myListPhotoUrl.push(childSrc);
+  if(childTitle, childSrc){
+    myListPhotoTitle.push(childTitle);
+    myListPhotoUrl.push(childSrc);
+  }
+  else{
+    console.log("No picture URL or info was passed.");
+  }
 }
 
 //Builds users personal photo-list from global variables.
