@@ -103,7 +103,7 @@ function callback(data) {
  }
 }
 
-//Creates photo boxes
+//Creates HTML photo boxes.
 function photoBuilder(photo){
   if(photo){
     var child = document.createElement("div");
