@@ -73,8 +73,7 @@ function callback(data) {
       var favBtn = document.createElement("button");
 
       photo = rsp.photos.photo[i];
-      t_url = "http://farm" + photo.farm + ".static.flickr.com/" +
-      photo.server + "/" + photo.id + "_" + photo.secret + "_" + "q.jpg";
+      t_url = photoUrlBuilder(photo.farm, photo.server, photo.id, photo.secret);
 
       child.className += "pictures";
       picBox.className += "pictureBox";
@@ -111,6 +110,17 @@ function callback(data) {
  else{
    console.log("No data was recived from request.");
  }
+}
+
+//Creates photo urls based on callback from FlickrAPI.
+function photoUrlBuilder(farm, server, id, secret){
+  if(farm, server, id, secret){
+    return "http://farm" + farm + ".static.flickr.com/" +
+    server + "/" + id + "_" + secret + "_" + "q.jpg";
+  }
+  else{
+    console.log("All variables was not passed.");
+  }
 }
 
 //Removes child elements of div "resultBox".
