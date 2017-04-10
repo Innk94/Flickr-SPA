@@ -21,7 +21,7 @@ function searchPictures() {
     }
 
     removeChildren("resultBox");
-    searchBtn.style.backgroundColor = "#7aa3cc";
+    searchBtn.style.backgroundColor = "#F7B733";
 
     //Builds URLs based on search value.
     for (var item in options) {
@@ -131,7 +131,7 @@ function photoBuilder(photo){
     });
 
     favBtn.className = 'saveBtn';
-    favBtn.innerHTML = 'Save picture';
+    favBtn.innerHTML = 'Save';
     favBtn.addEventListener( 'click', function(){
         addPictureToList(this.previousSibling.firstChild.alt, this.previousSibling.firstChild.src);
         this.style.backgroundColor = "#8ECC8E";
@@ -154,7 +154,7 @@ function photoBuilder(photo){
 function photoUrlBuilder(farm, server, id, secret){
   if(farm, server, id, secret){
     return "http://farm" + farm + ".static.flickr.com/" +
-    server + "/" + id + "_" + secret + "_" + "q.jpg";
+    server + "/" + id + "_" + secret + "_" + "c.jpg";
   }
   else{
     console.log("Passed parameter is empty.");

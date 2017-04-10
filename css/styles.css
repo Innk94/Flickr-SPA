@@ -4,8 +4,10 @@
 }
 
 body {
-  background-color:#99CCFF;
+  background-color:#4ABDAC;
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  background-image:url("../images/connected.png");
+  background-repeat: repeat;
 }
 
 @-webkit-keyframes zoom {
@@ -36,7 +38,7 @@ body {
 #searchInput{
   border:none;
   border-bottom:solid #FFF;
-  background-color:#99CCFF;
+  background-color: transparent;
   color:white;
   width:80%;
   height:80px;
@@ -70,7 +72,7 @@ body {
 }
 
 .menuBtn{
-  background-color:#7aa3cc;
+  background-color:#F7B733;
   border:none;
   color:white;
   width:30%;
@@ -78,11 +80,20 @@ body {
   font-size:20px;
   margin:1%;
   border-radius: 5px;
+  box-shadow: 0 5px 4px -6px #777;
 }
 
 .totalResult{
-  margin: 1%;
   color:#FFF;
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 1%;
+  background-color:#8ECC8E;
+  border: 5px solid;
+  border-radius: 5px;
+  border-color: #8ECC8E;
+  box-shadow: 0 5px 4px -6px #777;
 }
 
 .pictures{
@@ -93,8 +104,12 @@ body {
   height: 200px;
   margin: 1%;
   text-align: center;
-  background-color: #5b7a99;
+  background-color: #F7B733;
+  box-shadow: 0 5px 4px -6px #777;
+}
 
+.pictures:hover{
+  opacity: 0.9;
 }
 
 .pictureBox{
@@ -114,7 +129,12 @@ body {
   border:none;
   font-size:30px;
   left:0px;
+  cursor: pointer;
   visibility:hidden;
+}
+
+.mouseOverText{
+  cursor: pointer;
 }
 
 .pictureBox:hover .mouseOverText {
@@ -157,15 +177,14 @@ body {
 }
 
 .saveBtn{
-  height:20px;
   border-radius: 5px;
   color:#FFF;
-  height:30px;
-  width:90%;
-  margin-top:10px;
-  font-size:20px;
+  height:50px;
+  width:100%;
+  font-size:15px;
+  background-color: transparent;
   border:none;
-  background-color:#7aa3cc;
+  cursor: pointer;
 }
 
 .modal {
